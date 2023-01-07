@@ -1,8 +1,9 @@
 import React from 'react'
 import Avatar from '../components/avatar/Avatar'
 import BreadCrumb from '../components/navigation/BreadCrumb'
+import IPageLayout from './IPageLayout'
 
-const PageLayout = ({ children, title, subItems }: any) => {
+const PageLayout = ({ children, title, subItems }: IPageLayout) => {
     return (
         <div className="bg-white h-screen py-8 px-24">
             <section>

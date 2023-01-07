@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TableHeader = ({ label }: any) => {
+const TableHeader = ({ label }: string | any) => {
     return (
         <th
             scope="col"

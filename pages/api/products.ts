@@ -27,7 +27,7 @@ export const getAllProducts = async () => {
     })
 }
 
-export const deleteProduct = async (productId: any) => {
+export const deleteProduct = async (productId: string) => {
     return new Promise((resolve, reject) => {
         axios
             .delete(`${baseURL}${endPointURL}`, {
@@ -42,7 +42,9 @@ export const deleteProduct = async (productId: any) => {
     })
 }
 
-export const getSigleProduct = async (productId: any) => {
+export const getSigleProduct = async (
+    productId: string | string[] | undefined
+) => {
     console.log(productId)
 
     return new Promise((resolve, reject) => {
@@ -59,7 +61,10 @@ export const getSigleProduct = async (productId: any) => {
     })
 }
 
-export const updateProduct = async (id: any, product: any) => {
+export const updateProduct = async (
+    id: string | string[] | undefined,
+    product: any
+) => {
     return new Promise((resolve, reject) => {
         axios
             .put(`${baseURL}${endPointURL}`, {
