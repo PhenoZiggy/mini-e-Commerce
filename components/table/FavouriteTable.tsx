@@ -16,20 +16,14 @@ import { downloadImages } from '../../pages/api/image'
 import Link from 'next/link'
 import { favouriteStore } from '../../store/store'
 
-const Table = () => {
+const FavouriteTable = () => {
     const [toggle, setToggle] = useState<boolean>(false)
-
-    const [productArray, setProductArray] = useState<any>([])
+    const [productArray, setProductArray] = useState<any>(
+        favouriteStore.getState()
+    )
     const [imageArray, setImageArray] = useState<any[]>([])
     const [imageBase64Array, setImageBase64Array] = useState<any>([])
     const [id, setId] = useState<string>('')
-    const [favourites, setFavourites] = useState<object[]>()
-
-    const getProducts = async () => {
-        await getAllProducts().then((res) => {
-            setProductArray(res)
-        })
-    }
 
     //get images
     const getImages = () => {
@@ -37,10 +31,6 @@ const Table = () => {
             setImageBase64Array(res)
         })
     }
-
-    useEffect(() => {
-        getProducts()
-    }, [])
 
     useEffect(() => {
         if (productArray) {
@@ -60,7 +50,7 @@ const Table = () => {
         setToggle(!toggle)
     }
 
-    //delete one item
+    // delete item
     const deleteOne = (id: string) => {
         deleteProduct(id).then(async () => {
             await getAllProducts().then((res) => {
@@ -70,16 +60,17 @@ const Table = () => {
         })
     }
 
-    //set favourite item
+    // set favourite item
     const setFavourite = (product: any) => {
         favouriteStore.dispatch({ type: 'ADD', payload: product })
     }
 
-    //check favourite item availability 
+    // check favourite availability
     const favourite = (id: any) => {
         let state = false
+        let favourites = favouriteStore.getState()
         if (favourites) {
-            if (favourites?.find((e: any) => e._id == id)) {
+            if (favourites.find((e: any) => e._id == id)) {
                 state = true
             } else {
                 state = false
@@ -87,12 +78,6 @@ const Table = () => {
         }
         return state
     }
-
-    useEffect(() => {
-        favouriteStore.subscribe(() => {
-            setFavourites(favouriteStore.getState())
-        })
-    }, [])
 
     return (
         <div className="px-4">
@@ -234,4 +219,4 @@ const Table = () => {
     )
 }
 
-export default Table
+export default FavouriteTable

@@ -2,6 +2,7 @@ import React from 'react'
 import IInputField from './IInputField'
 
 const InputField = ({
+    type = 'text',
     title,
     value,
     setValue,
@@ -16,7 +17,7 @@ const InputField = ({
                 onChange={(e: any) => {
                     setValue(e.target.value)
                 }}
-                type="text"
+                type={type}
                 required={required}
             />
         </div>
