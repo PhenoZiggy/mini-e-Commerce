@@ -25,24 +25,32 @@ const Home: NextPage = () => {
     const [imageBase64Array, setImageBase64Array] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
+    const [error, setError] = useState<string>()
+
     const handleImageArray = (imageId: any) => {
         setImageArray((prev) => {
             return [...prev, imageId]
         })
         setLoading(true)
-        console.log(imageArray)
     }
-
+    
     const handleOnSubmit = async () => {
-        const product = {
-            SKU: sku,
-            Name: name,
-            QTY: qty,
-            Description: description,
-            ImageIDs: imageArray,
-            selectedImage: selectedImage ? selectedImage : imageArray[0],
+        setError('')
+        if (sku && name && qty && description && imageArray) {
+            const product = {
+                SKU: sku,
+                Name: name,
+                QTY: qty,
+                Description: description,
+                ImageIDs: imageArray,
+                selectedImage: selectedImage ? selectedImage : imageArray[0],
+            }
+            await newProduct(product).then(() => {
+                router.push('/')
+            })
+        } else {
+            setError('Some fields are empty')
         }
-        await newProduct(product).then()
     }
 
     useEffect(() => {
@@ -78,7 +86,7 @@ const Home: NextPage = () => {
                             <p className="">
                                 JPEG, PNG, SVG or GIF (Maximum file size 50MB)
                             </p>
-                            <div>
+                            <div className="flex space-x-3">
                                 {imageBase64Array.map((image, index) => {
                                     return (
                                         <div key={index}>
@@ -115,8 +123,10 @@ const Home: NextPage = () => {
                             label="Add Product"
                             type="primary"
                             onClick={handleOnSubmit}
+                            disabled={loading}
                         />
                     </section>
+                    <p className="text-red-500">{error}</p>
                 </section>
             </PageLayout>
         </div>

@@ -19,6 +19,7 @@ const AddImages = ({ handleImageArray, label }: any) => {
                     name="file-upload"
                     type="file"
                     className="sr-only"
+                    multiple
                 />
             </label>
         </div>
