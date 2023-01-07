@@ -81,7 +81,12 @@ const Home: NextPage = () => {
                 <div className="grid grid-cols-2">
                     <InputField title="Name" value={name} setValue={setName} />
                     <div className="px-16">
-                        <InputField title="QTY" value={qty} setValue={setQty} />
+                        <InputField
+                            title="QTY"
+                            value={qty}
+                            setValue={setQty}
+                            type="Number"
+                        />
                     </div>
                 </div>
                 <div>

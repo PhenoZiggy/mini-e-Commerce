@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         })
         setLoading(true)
     }
-    
+
     const handleOnSubmit = async () => {
         setError('')
         if (sku && name && qty && description && imageArray) {
@@ -70,7 +70,11 @@ const Home: NextPage = () => {
                     <div className="grid grid-cols-2">
                         <InputField title="Name" setValue={setName} />
                         <div className="px-16">
-                            <InputField title="QTY" setValue={setQty} />
+                            <InputField
+                                title="QTY"
+                                setValue={setQty}
+                                type="Number"
+                            />
                         </div>
                     </div>
                     <div>

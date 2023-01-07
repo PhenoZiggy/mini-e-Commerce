@@ -1,4 +1,5 @@
 import React from 'react'
+import ITextArea from './ITextArea'
 
 const TextArea = ({
     title,
@@ -6,7 +7,7 @@ const TextArea = ({
     value,
     setValue,
     required = false,
-}: any) => {
+}: ITextArea) => {
     return (
         <div className="space-y-2 items-center">
             <label className="font-medium text-lg text-text">{title}</label>

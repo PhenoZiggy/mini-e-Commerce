@@ -13,6 +13,9 @@ const Home: NextPage = () => {
     const routeToPage = () => {
         router.push('/new-product')
     }
+    const routeToFav = () => {
+        router.push('/favourite-products')
+    }
     return (
         <PageLayout title="Products">
             <section className="py-8 flex justify-between">
@@ -25,7 +28,12 @@ const Home: NextPage = () => {
                         type="primary"
                         onClick={routeToPage}
                     />
-                    <Button Figure={StarIcon} />
+                    <Button
+                        Figure={StarIcon}
+                        onClick={() => {
+                            routeToFav()
+                        }}
+                    />
                 </div>
             </section>
             <section>

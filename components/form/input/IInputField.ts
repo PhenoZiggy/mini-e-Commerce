@@ -1,4 +1,5 @@
 interface IInputField {
+    type?: string
     title?: string
     value?: any
     label?: string
