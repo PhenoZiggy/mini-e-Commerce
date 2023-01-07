@@ -116,7 +116,7 @@ const Table = () => {
                             <tbody>
                                 {productArray.map(
                                     (product: any, index: number) => (
-                                        <tr className="border-b">
+                                        <tr className="border-b" key={index}>
                                             <td className="px-5">
                                                 <p className="text-secondary">
                                                     #{product.SKU}
