@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputField = ({ title, value, setValue, type }: any) => {
+const InputField = ({ title, value, setValue, required = false }: any) => {
     return (
         <div className="flex space-x-4 items-center">
             <p className="font-medium text-lg text-text">{title}</p>
@@ -11,6 +11,7 @@ const InputField = ({ title, value, setValue, type }: any) => {
                     setValue(e.target.value)
                 }}
                 type="text"
+                required={required}
             />
         </div>
     )

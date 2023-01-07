@@ -26,3 +26,51 @@ export const getAllProducts = async () => {
             })
     })
 }
+
+export const deleteProduct = async (productId: any) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .delete(`${baseURL}${endPointURL}`, {
+                params: { productId: productId },
+            })
+            .then((res) => {
+                resolve(res.data.message)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
+
+export const getSigleProduct = async (productId: any) => {
+    console.log(productId)
+
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`${baseURL}${endPointURL}/single`, {
+                params: { productId: productId },
+            })
+            .then((res) => {
+                resolve(res.data.product)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}
+
+export const updateProduct = async (id: any, product: any) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`${baseURL}${endPointURL}`, {
+                productId: id,
+                product: product,
+            })
+            .then((res) => {
+                resolve(res.data.message)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}

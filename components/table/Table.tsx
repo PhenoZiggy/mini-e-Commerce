@@ -9,8 +9,9 @@ import {
 } from '@heroicons/react/solid'
 import Popup from '../popup/Popup'
 import { Dialog } from '@headlessui/react'
-import { getAllProducts } from '../../pages/api/products'
+import { deleteProduct, getAllProducts } from '../../pages/api/products'
 import { downloadImages } from '../../pages/api/image'
+import Link from 'next/link'
 
 const Table = () => {
     const [toggle, setToggle] = useState<boolean>(false)
@@ -18,6 +19,7 @@ const Table = () => {
     const [productArray, setProductArray] = useState<any>([])
     const [imageArray, setImageArray] = useState<any[]>([])
     const [imageBase64Array, setImageBase64Array] = useState<any>([])
+    const [id, setId] = useState()
 
     const getProducts = async () => {
         await getAllProducts().then((res) => {
@@ -36,11 +38,13 @@ const Table = () => {
     }, [])
 
     useEffect(() => {
-        productArray.every(async (product: any) => {
-            setImageArray((prev) => {
-                return [...prev, product.selectedImage]
+        if (productArray) {
+            productArray.every(async (product: any) => {
+                setImageArray((prev) => {
+                    return [...prev, product.selectedImage]
+                })
             })
-        })
+        }
     }, [productArray])
 
     useEffect(() => {
@@ -50,6 +54,16 @@ const Table = () => {
     const openModal = () => {
         setToggle(!toggle)
     }
+
+    const deleteOne = (id: any) => {
+        deleteProduct(id).then(async () => {
+            await getAllProducts().then((res) => {
+                setProductArray(res)
+                openModal()
+            })
+        })
+    }
+
     return (
         <div className="px-4">
             <Popup toggle={toggle} setToggle={setToggle}>
@@ -67,9 +81,23 @@ const Table = () => {
                     >
                         ARE YOU SURE?
                     </Dialog.Title>
-                    <p>
+                    <p className="py-5">
                         You will not be able to undo this action if you proceed!
                     </p>
+                    <section className="flex space-x-2 justify-center">
+                        <Button
+                            label="Cancel"
+                            type="outlined"
+                            onClick={openModal}
+                        />
+                        <Button
+                            label="Delete"
+                            type="primary"
+                            onClick={() => {
+                                deleteOne(id)
+                            }}
+                        />
+                    </section>
                 </div>
             </Popup>
             <div className="py-8">
@@ -132,12 +160,18 @@ const Table = () => {
                                                     type="none"
                                                     onClick={() => {
                                                         openModal()
+                                                        setId(product._id)
                                                     }}
                                                 />
-                                                <Button
-                                                    Figure={PencilIcon}
-                                                    type="none"
-                                                />
+
+                                                <Link
+                                                    href={`edit-product?id=${product._id}`}
+                                                >
+                                                    <Button
+                                                        Figure={PencilIcon}
+                                                        type="none"
+                                                    />
+                                                </Link>
                                                 <Button
                                                     Figure={StarIcon}
                                                     type="none"

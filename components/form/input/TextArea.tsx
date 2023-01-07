@@ -1,6 +1,12 @@
 import React from 'react'
 
-const TextArea = ({ title, subTitle, value, setValue }: any) => {
+const TextArea = ({
+    title,
+    subTitle,
+    value,
+    setValue,
+    required = false,
+}: any) => {
     return (
         <div className="space-y-2 items-center">
             <label className="font-medium text-lg text-text">{title}</label>
@@ -13,6 +19,7 @@ const TextArea = ({ title, subTitle, value, setValue }: any) => {
                 }}
                 rows={4}
                 cols={50}
+                required={required}
             />
         </div>
     )
