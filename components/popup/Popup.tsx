@@ -1,7 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import IPopUp from './IPopUp'
 
-export default function Popup({ toggle = false, setToggle, children }: any) {
+export default function Popup({ toggle = false, setToggle, children }: IPopUp) {
     let [isOpen, setIsOpen] = useState(toggle)
 
     function closeModal() {

@@ -19,7 +19,7 @@ const Table = () => {
     const [productArray, setProductArray] = useState<any>([])
     const [imageArray, setImageArray] = useState<any[]>([])
     const [imageBase64Array, setImageBase64Array] = useState<any>([])
-    const [id, setId] = useState()
+    const [id, setId] = useState<string>('')
 
     const getProducts = async () => {
         await getAllProducts().then((res) => {
@@ -55,7 +55,7 @@ const Table = () => {
         setToggle(!toggle)
     }
 
-    const deleteOne = (id: any) => {
+    const deleteOne = (id: string) => {
         deleteProduct(id).then(async () => {
             await getAllProducts().then((res) => {
                 setProductArray(res)

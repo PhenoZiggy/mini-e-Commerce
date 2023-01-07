@@ -1,6 +1,13 @@
 import React from 'react'
+import IButton from './IButton'
 
-const Button = ({ type, Figure, label, onClick, disabled = false }: any) => {
+const Button = ({
+    type,
+    Figure,
+    label,
+    onClick,
+    disabled = false,
+}: IButton) => {
     const buttonType = () => {
         if (type == 'primary') {
             return 'bg-primary'
